@@ -21,7 +21,6 @@ const url  = process.env.KAFKA_URL
 if (!cert) throw new Error('KAFKA_CLIENT_CERT environment variable must be defined.');
 if (!key) throw new Error('KAFKA_CLIENT_CERT_KEY environment variable must be defined.');
 if (!url) throw new Error('KAFKA_URL environment variable must be defined.');
-if (!url) throw new Error('KAFKA_URL environment variable must be defined.');
 
 // Check that Algorithmia API key exists
 const algoApiKey = process.env.ALGORITHMIA_API_KEY;
@@ -103,14 +102,14 @@ return producer.init().then(function() {
         let allTweets = stream.scan({}, accTweets);
 
         // Sample and calc sentiment for tweets every N seconds
-        let sampleTweets = allTweets.sample(3 * ONE_SECOND);
+        let sampleTweets = allTweets.sample(ONE_SECOND);
 
         sampleTweets.onValue(function(tweets) {
 
-            algoClient.algo("algo://nlp/SocialSentimentAnalysis/0.1.3")
+            algoClient.algo("algo://nlp/SocialSentimentAnalysis/0.1.5")
                 .pipe(tweets)
                 .then(function(response) {
-
+                    
                     var result = response.get();
                     var avgSentiment = _.sumBy(result, (i) => i.compound) / result.length;
 
@@ -118,7 +117,7 @@ return producer.init().then(function() {
                         time: Date.now(),
                         avgSentiment: avgSentiment,
                     }
-
+                    
                     producer.send({
                         topic: `${consumerTopicBase}-sentiment`,
                         partition: 0,
