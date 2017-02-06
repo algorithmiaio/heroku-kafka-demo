@@ -106,7 +106,7 @@ return producer.init().then(function() {
 
         sampleTweets.onValue(function(tweets) {
 
-            if (tweets == null || typeof tweets === "undefined")
+            if (_.isEmpty(tweets))
                 tweets = []
 
             algoClient.algo("algo://nlp/SocialSentimentAnalysis/0.1.5")
