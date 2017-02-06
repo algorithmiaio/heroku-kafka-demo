@@ -1,0 +1,9 @@
+{
+    "extends": "magictoolbox/legacy",
+    "rules": {
+    },
+    "parserOptions": {
+    },
+    "env": {
+    }
+}
