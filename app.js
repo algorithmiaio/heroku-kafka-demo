@@ -109,7 +109,7 @@ return producer.init().then(function() {
             if (_.isEmpty(tweets))
                 tweets = []
 
-            algoClient.algo("algo://nlp/SocialSentimentAnalysis/0.1.5")
+            algoClient.algo("algo://nlp/SocialSentimentAnalysis")
                 .pipe(tweets)
                 .then(function(response) {
                     
