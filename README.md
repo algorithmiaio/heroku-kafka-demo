@@ -1,4 +1,4 @@
-# algo-kafka-sentiment
+# Heroku + KAFKA + Algorithmia
 
 This app is one component of the Algorithmia/Kafka demo. Intended to populate the average sentiment for a topic.
 
